@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+<head>
+
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="An app for invoice management" name="description" />
+    <meta content="Invoice" name="Kayfz and Tee" />
+    <!-- App favicon -->
+    <!-- <link rel="shortcut icon" href="images/favicon.ico"> -->
+
+    <!-- Layout config Js -->
+    <script src="{{url_for('static', filename='js/layout.js')}}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{url_for('static', filename='css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{url_for('static', filename='css/app.min.css')}}" rel="stylesheet" type="text/css" />
+
+</head>
+
+{% block content %}
+
+{% endblock content %}
+
+ <!-- JAVASCRIPT -->
+    <script src="{{url_for('static', filename='libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='libs/simplebar/simplebar.min.js')}}"></script>
+    <script src="{{url_for('static', filename='libs/node-waves/waves.min.js')}}"></script>
+    <script src="{{url_for('static', filename='libs/feather-icons/feather.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/plugins.js')}}"></script>
+
+</body>
+
+
+</html>
