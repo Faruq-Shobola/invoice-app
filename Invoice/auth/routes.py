@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from invoice import db, bcrypt
 from invoice.auth.forms import RegistrartionForm, LoginForm
 from invoice.auth.models import User
@@ -44,3 +44,11 @@ def sign_in():
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('signin.html', title="Sign in", form=form)
+
+
+@auth.route('/signout')
+def sign_out():
+    logout_user()
+    flash('You have logged out successfully', 'info')
+    return redirect(url_for('auth.home'))
+    
