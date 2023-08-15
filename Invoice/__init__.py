@@ -1,25 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .config import Config
-
+from flask_bcrypt import Bcrypt
+from invoice.config import Config
 
 db = SQLAlchemy()
+bcrypt = Bcrypt()
 
-def create_app():
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-  app = Flask(__name__)
-  app.config.from_object(Config)
-  
-  
-  from .auth.routes import auth
-  
-  app.register_blueprint(auth)
-  
-  db.init_app(app)
-  
-  
-  
-  with app.app_context():
-    db.create_all()
-  
-  return app
+    db.init_app(app)
+    bcrypt.init_app(app)
+
+    from .auth.routes import auth
+
+    app.register_blueprint(auth)
+
+    return app
