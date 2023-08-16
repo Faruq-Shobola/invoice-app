@@ -13,7 +13,7 @@ def home():
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
-def sign_up():
+def signup():
     if current_user.is_authenticated:
         return redirect(url_for('auth.home'))
     
@@ -27,13 +27,13 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         flash('You have been registered', 'success')
-        return redirect(url_for('auth.home'))
+        return redirect(url_for('auth.signin'))
 
     return render_template('signup.html', title='Sign up', form=form)
 
 
 @auth.route('/signin', methods=['Get', 'POST'])
-def sign_in():
+def signin():
     if current_user.is_authenticated:
         return redirect(url_for('auth.home'))
     
@@ -44,8 +44,7 @@ def sign_in():
         if user and password:
             login_user(user, remember=form.remember.data)
             next = request.args.get('next')
-            flash(f'{user.username} your are logged in', 'info')
-            return redirect(next) if next else redirect(url_for('auth.home'))
+            return redirect(next) if next else redirect(url_for('acct.home'))
         
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -53,7 +52,7 @@ def sign_in():
 
 
 @auth.route('/signout')
-def sign_out():
+def signout():
     logout_user()
     flash('You have logged out successfully', 'info')
     return redirect(url_for('auth.home'))

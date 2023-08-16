@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 <head>
-
+{% block head %}
     <meta charset="utf-8" />
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,7 @@
     <link href="{{url_for('static', filename='css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
 </head>
+{% endblock head %}
 
 {% block content %}
 
@@ -31,6 +32,7 @@
     <script src="{{url_for('static', filename='libs/node-waves/waves.min.js')}}"></script>
     <script src="{{url_for('static', filename='libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/plugins.js')}}"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
 
 </body>
 

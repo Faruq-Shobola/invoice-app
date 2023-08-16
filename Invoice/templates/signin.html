@@ -1,4 +1,7 @@
 {% extends "layout.html" %} {% block content %}
+{% block head %}
+{{super()}}
+{% endblock head %}
 
 <body class="auth-bg 100-vh">
   <div class="bg-overlay bg-light"></div>
@@ -86,7 +89,7 @@
                                 </div> -->
 
                                 <div class="mt-4 text-center">
-                                    <p class="mb-0">Don't have an account ? <a href="{{url_for('auth.sign_up')}}" class="fw-medium text-primary text-decoration-underline"> Signup now </a> </p>
+                                    <p class="mb-0">Don't have an account ? <a href="{{url_for('auth.signup')}}" class="fw-medium text-primary text-decoration-underline"> Signup now </a> </p>
                                 </div>
                             </form>
                         </div>
