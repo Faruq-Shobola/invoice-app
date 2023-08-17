@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user
 from invoice import db, bcrypt
 from invoice.auth.forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm
-from invoice.auth.models import User
+from invoice.models import User
 from invoice.mailgun import MailgunApi
 from dotenv import load_dotenv
 import os
