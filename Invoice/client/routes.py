@@ -4,8 +4,15 @@ from invoice.client.forms import ClientForm
 client = Blueprint('client', __name__)
 
 
+@client.route('/clients')
+def clients():
+    
+    return render_template('client/clients.html', title='Clients')
+
+
 @client.route('/add-client', methods=['GET', 'POST'])
 def add_client():
     form = ClientForm()
     
     return render_template('/client/addclient.html', title='Add Client', form=form)
+
