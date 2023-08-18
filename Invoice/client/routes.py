@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from invoice import db
 from invoice.client.forms import ClientForm
 from invoice.models import Client
+from invoice.utils import save_image
 
 client = Blueprint('client', __name__)
 
@@ -24,7 +25,8 @@ def add_client():
         email = form.email.data
         phone = form.number.data
         website = form.website.data
-        logo = form.logo.data
+        if form.logo.data: 
+            logo = save_image(image=form.logo.data, folder='client-img')
         address = form.address.data
         client = Client(name=name, client_type=client_type, email=email, phone=phone, website=website, logo=logo, address=address, customer=current_user)
         db.session.add(client)
