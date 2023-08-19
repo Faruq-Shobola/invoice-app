@@ -1,4 +1,5 @@
 import os, secrets
+from flask import request
 from PIL import Image
 from flask_uploads import extension
 from invoice import image as img
@@ -30,5 +31,12 @@ def compress_image(filename, folder):
     os.remove(file_path)
     
     return compressed_filename
+
+
+def paginate(query, per_page):
+    page = request.args.get('page', 1, type=int)
+    paginated = query.paginate(page=page, per_page=per_page)
+    
+    return paginated
     
     
