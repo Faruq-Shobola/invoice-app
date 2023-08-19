@@ -1,3 +1,4 @@
+from datetime import datetime
 from invoice import db, login_manager
 from flask import current_app
 from flask_login import UserMixin
@@ -45,6 +46,7 @@ class Client(db.Model):
     address = db.Column(db.Text())
     logo = db.Column(db.String(), default='logo.jpg')
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    date_joined = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
     
     def __repr__(self):
         return f'{self.name} - {self.email}'

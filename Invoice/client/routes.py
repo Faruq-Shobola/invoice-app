@@ -11,8 +11,8 @@ client = Blueprint('client', __name__)
 @client.route('/clients')
 @login_required
 def clients():
-    
-    return render_template('client/clients.html', title='Clients')
+    clients = Client.query.filter_by(customer=current_user).all()
+    return render_template('client/clients.html', title='Clients', clients=clients)
 
 
 @client.route('/add-client', methods=['GET', 'POST'])
