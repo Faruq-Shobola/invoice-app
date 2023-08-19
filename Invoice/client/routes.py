@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from invoice import db
 from invoice.client.forms import ClientForm
 from invoice.models import Client
-from invoice.utils import save_image
+from invoice.utils import save_image, paginate
 
 client = Blueprint('client', __name__)
 
@@ -11,8 +11,9 @@ client = Blueprint('client', __name__)
 @client.route('/clients')
 @login_required
 def clients():
-    clients = Client.query.filter_by(customer=current_user).all()
-    return render_template('client/clients.html', title='Clients', clients=clients)
+    clients = Client.query.filter_by(customer=current_user).order_by(Client.date_joined.desc())
+    clients = paginate(clients, 2)
+    return render_template('client/clients.html', title='Clients', clients=clients, endpoint='client.clients')
 
 
 @client.route('/add-client', methods=['GET', 'POST'])
