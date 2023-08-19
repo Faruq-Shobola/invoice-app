@@ -41,15 +41,33 @@
                                 {{form.csrf_token}}
                                 <div class="mb-3">
                                     {{form.email.label(class="form-label")}}
-                                    {{form.email(class="form-control",id="email", placeholder="Enter email")}}
+
+                                    {% if form.email.errors %}
+                                      {{form.email(class="form-control is-invalid",id="email", placeholder="Enter email")}}
+                                      <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                          <span>{{ error }}</span>
+                                        {% endfor %}
+                                      </div>
+                                    {% else %}
+                                      {{form.email(class="form-control",id="email", placeholder="Enter email")}}
+                                    {% endif %}
 
                                 </div>
         
                                  <div class="mb-2">
                                     {{form.password.label(class="form-label")}}
-                                    <div class="position-relative auth-pass-inputgroup mb-3">
-                                        {{form.password(class="form-control pe-5 password-input", placeholder="Enter password",id="password-input")}}
-                                    </div>
+
+                                    {% if form.password.errors %}
+                                      {{form.password(class="form-control pe-5 password-input is-invalid", placeholder="Enter password",id="password-input")}}
+                                      <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                          <span>{{ error }}</span>
+                                        {% endfor %}
+                                      </div>
+                                    {% else %}
+                                      {{form.password(class="form-control pe-5 password-input", placeholder="Enter password",id="password-input")}}
+                                    {% endif %}
                                 </div>
 
                                 <div class="form-check form-check-primary fs-16 py-2">
@@ -63,30 +81,6 @@
                                 <div class="mt-2">
                                     {{form.submit(class="btn btn-primary w-100")}}
                                 </div>
-
-                                <!-- <div class="mt-4 text-center">
-                                    <div class="signin-other-title">
-                                        <h5 class="fs-15 mb-3 title">Sign in with</h5>
-                                    </div>
-    
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void()" class="social-list-item bg-primary text-white border-primary">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void()" class="social-list-item bg-info text-white border-info">
-                                                <i class="mdi mdi-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void()" class="social-list-item bg-danger text-white border-danger">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> -->
 
                                 <div class="mt-4 text-center">
                                     <p class="mb-0">Don't have an account ? <a href="{{url_for('auth.signup')}}" class="fw-medium text-primary text-decoration-underline"> Signup now </a> </p>

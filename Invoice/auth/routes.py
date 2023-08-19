@@ -48,14 +48,16 @@ def signin():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        password = bcrypt.check_password_hash(user.password, form.password.data)
-        if user and password:
-            login_user(user, remember=form.remember.data)
-            next = request.args.get('next')
-            return redirect(next) if next else redirect(url_for('account.home'))
-        
+        if user is not None:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=form.remember.data)
+                next = request.args.get('next')
+                return redirect(next) if next else redirect(url_for('account.home'))
+            
+            else:
+                flash('Login Unsuccessful. Please check email and password', 'danger')
         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            flash('Email not registered', 'danger')
     return render_template('auth/signin.html', title="Sign in", form=form)
 
 

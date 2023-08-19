@@ -36,60 +36,56 @@
                         </div>
                         {% include "_messages.html" %}
                         <div class="mt-4">
-                          <form action="" method="POST" class="auth-input">
+                          <form action="" method="POST">
                             {{form.csrf_token}}
                             <div class="mb-3">
                               {{form.email.label(class="form-label")}}
-                              {{form.email(class="form-control", id="email", placeholder="Enter email")}}
+
+                              {% if form.email.errors %}
+                                {{form.email(class="form-control is-invalid", id="email", placeholder="Enter email")}}
+                                <div class="invalid-feedback">
+                                  {% for error in form.email.errors %}
+                                  <span>{{error}}</span>
+                                  {% endfor %}
+                                </div>
+                              {% else %}
+                                {{form.email(class="form-control", id="email", placeholder="Enter email")}}
+                              {% endif %}
                             </div>
 
                             <div class="mb-3">
                               {{form.username.label(class="form-label")}}
-                              {{form.username(class="form-control",id="username", placeholder="Enter username")}}
+
+                              {% if form.username.errors %}
+                                {{form.username(class="form-control is-invalid",id="username", placeholder="Enter username")}}
+                                <div class="invalid-feedback">
+                                  {% for error in form.username.errors %}
+                                    <span>{{error}}</span>
+                                  {% endfor %}
+                                </div>
+                              {% else %}
+                                {{form.username(class="form-control",id="username", placeholder="Enter username")}}
+                              {% endif %}
                             </div>
 
                             <div class="mb-2">
                               {{form.password.label(class="form-label")}}
-                              <div
-                                class="position-relative auth-pass-inputgroup mb-3"
-                              >
-                                {{form.password(class="form-control pe-5
-                                password-input", placeholder="Enter password",
-                                id="password-input")}}
-                              </div>
-                            </div>
 
-                            <!-- <div class="fs-16 pb-2">
-                                                                <p class="mb-0 fs-14 text-muted fst-italic">By registering you agree to the Invoika <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
-                                                            </div> -->
+                              {% if form.password.errors %}
+                                {{form.password(class="form-control pe-5 password-input is-invalid", placeholder="Enter password",id="password-input")}}
+                                <div class="invalid-feedback">
+                                  {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                  {% endfor %}
+                                </div>
+                              {% else %}
+                                {{form.password(class="form-control pe-5 password-input", placeholder="Enter password",id="password-input")}}
+                              {% endif %}
+                            </div>
 
                             <div class="mt-2">
                               {{form.submit(class="btn btn-primary w-100")}}
                             </div>
-
-                            <!-- <div class="mt-4 text-center">
-                                                                <div class="signin-other-title">
-                                                                    <h5 class="fs-15 mb-3 title">Create account with</h5>
-                                                                </div>
-                                
-                                                                <ul class="list-inline">
-                                                                    <li class="list-inline-item">
-                                                                        <a href="javascript:void()" class="social-list-item bg-primary text-white border-primary">
-                                                                            <i class="mdi mdi-facebook"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="list-inline-item">
-                                                                        <a href="javascript:void()" class="social-list-item bg-info text-white border-info">
-                                                                            <i class="mdi mdi-twitter"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="list-inline-item">
-                                                                        <a href="javascript:void()" class="social-list-item bg-danger text-white border-danger">
-                                                                            <i class="mdi mdi-google"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div> -->
 
                             <div class="mt-4 text-center">
                               <p class="mb-0">
