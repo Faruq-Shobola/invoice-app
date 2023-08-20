@@ -40,6 +40,12 @@ def add_client():
     
     return render_template('/client/addclient.html', title='Add Client', form=form)
 
+@client.route('/<int:id>')
+@login_required
+def single_client(id):
+    client = Client.query.get_or_404(id)
+    return render_template('client/single-client.html', title='Client', client=client)
+    
 
 @client.route('/<int:id>/delete')
 @login_required

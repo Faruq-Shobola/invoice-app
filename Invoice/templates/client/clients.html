@@ -82,8 +82,8 @@ b{% extends "dashcommon.html" %}
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li>
-                                                            <button class="dropdown-item" href="javascript:void(0);"><i class="las la-eye fs-18 align-middle me-2 text-muted"></i>
-                                                                View</button>
+                                                            <a class="dropdown-item" href="{{url_for('client.single_client', id=client.id)}}"><i class="las la-eye fs-18 align-middle me-2 text-muted"></i>
+                                                                View</a>
                                                         </li>
                                                         <li>
                                                             <button class="dropdown-item" href="javascript:void(0);"><i class="las la-pen fs-18 align-middle me-2 text-muted"></i>
