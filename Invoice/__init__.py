@@ -31,6 +31,6 @@ def create_app(config_class=Config):
 
     app.register_blueprint(auth)
     app.register_blueprint(acct)
-    app.register_blueprint(client)
+    app.register_blueprint(client, url_prefix='/client')
 
     return app

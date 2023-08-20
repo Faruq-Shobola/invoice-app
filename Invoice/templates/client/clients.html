@@ -1,4 +1,4 @@
-{% extends "dashcommon.html" %} 
+b{% extends "dashcommon.html" %} 
 {% block pagecontent %}
 {% from "_pagination.html" import render_pagination %}
 
@@ -91,10 +91,10 @@
                                                         </li>
                                                         <li class="dropdown-divider"></li>
                                                         <li>
-                                                            <a class="dropdown-item remove-item-btn" href="#">
+                                                            <button class="dropdown-item remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteClientModal-{{client.id}}">
                                                                 <i class="las la-trash-alt fs-18 align-middle me-2 text-muted"></i>
                                                                 Delete
-                                                            </a>
+                                                            </button>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -132,3 +132,30 @@
 </div>
 
 {% endblock pagecontent %}
+
+{% block modal %}
+{% for client in clients.items %}
+    <div class="modal fade" id="deleteClientModal-{{client.id}}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-5">
+                    <div class="mt-4">
+                        <h4 class="mb-3">Are You Sure</h4>
+                        <p class="text-muted mb-4"> You wont be able to revert this</p>
+                        <div class="hstack gap-2 justify-content-center">
+                            <a class="btn btn-primary"href="{{url_for('client.delete_client', id=client.id)}}">Delete</a>
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end modal-content-->
+        </div>
+        <!--end modal-dialog-->
+    </div>
+{% endfor %}
+{% endblock modal %}
+

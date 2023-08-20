@@ -1,3 +1,5 @@
+import os
+from flask import current_app
 from flask import redirect, render_template, url_for, flash, Blueprint
 from flask_login import login_required, current_user
 from invoice import db
@@ -8,15 +10,15 @@ from invoice.utils import save_image, paginate
 client = Blueprint('client', __name__)
 
 
-@client.route('/clients')
+@client.route('/')
 @login_required
 def clients():
     clients = Client.query.filter_by(customer=current_user).order_by(Client.date_joined.desc())
-    clients = paginate(clients, 2)
+    clients = paginate(clients, 5)
     return render_template('client/clients.html', title='Clients', clients=clients, endpoint='client.clients')
 
 
-@client.route('/add-client', methods=['GET', 'POST'])
+@client.route('/add-new', methods=['GET', 'POST'])
 @login_required
 def add_client():
     form = ClientForm()
@@ -37,4 +39,16 @@ def add_client():
         
     
     return render_template('/client/addclient.html', title='Add Client', form=form)
+
+
+@client.route('/<int:id>/delete')
+@login_required
+def delete_client(id):
+    client = Client.query.get_or_404(id)
+    client_logo_path = os.path.join(current_app.root_path, 'static/images/client-img', client.logo) 
+    os.unlink(client_logo_path)
+    db.session.delete(client)
+    db.session.commit()
+    flash('Client successfully deleted', 'info')
+    return redirect(url_for('client.clients'))
 
