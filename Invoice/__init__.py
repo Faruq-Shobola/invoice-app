@@ -28,9 +28,11 @@ def create_app(config_class=Config):
     from .auth.routes import auth
     from .account.routes import acct
     from .client.routes import client
+    from .invoice.routes import invoice
 
     app.register_blueprint(auth)
     app.register_blueprint(acct)
     app.register_blueprint(client, url_prefix='/client')
+    app.register_blueprint(invoice, url_prefix='/invoice')
 
     return app
