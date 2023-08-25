@@ -1,0 +1,119 @@
+{% extends "dashcommon.html" %} 
+{% block pagecontent %}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Edit Client</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Account</a></li>
+                                <li class="breadcrumb-item active">New Client</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                                <form method="POST" enctype="multipart/form-data">
+                                    {{form.csrf_token}}
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                {{form.name.label(class="form-label")}}
+                                                {{form.name(class="form-control", placeholder="Enter client name")}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                    {{form.client_type.label(class="form-label")}}
+                                                    {{form.client_type(class="form-select")}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                {{form.email.label(class="form-label")}}
+                                                {{form.email(class="form-control", placeholder="Enter client email")}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                    {{form.number.label(class="form-label")}}
+                                                    {{form.number(class="form-control", placeholder="Enter client phone number")}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                {{form.website.label(class="form-label")}}
+                                                {{form.website(class="form-control", placeholder="Enter client website")}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                    {{form.logo.label(class="form-label")}}
+                                                    {{form.logo(class="form-control")}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{form.address.label(class="form-label")}}
+                                        {{form.address(class="form-control", style="height: 100px", placeholder="Enter client address")}}
+                                    </div>
+
+                                    <div class="hstack gap-2 mt-4">
+                                        {{form.submit(class="btn btn-primary")}}
+                                    </div>
+
+                                </form>
+                                                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Invoika.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Design & Develop by Themesbrand
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+{% endblock pagecontent %}

@@ -26,6 +26,7 @@
 
 {% endblock content %}
 
+{% block scripts %}
  <!-- JAVASCRIPT -->
     <script src="{{url_for('static', filename='libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url_for('static', filename='libs/simplebar/simplebar.min.js')}}"></script>
@@ -33,6 +34,8 @@
     <script src="{{url_for('static', filename='libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/plugins.js')}}"></script>
     <script src="{{url_for('static', filename='js/app.js')}}"></script>
+    
+{% endblock scripts %}
 
 </body>
 
