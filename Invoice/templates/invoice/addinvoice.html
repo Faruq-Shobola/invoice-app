@@ -95,27 +95,17 @@
                                         </thead>
                                         <tbody id="newlink">
                                             {% for item in form.items %}
-                                            <tr id="{{loop.index}}" class="product">
+                                            <tr id="newForm" class="product">
                                                 <th scope="row" class="product-id">{{loop.index}}</th>
                                                 <td class="text-start">
                                                     <div class="mb-2">
                                                         {{item.item_name(class="form-control bg-light border-0", placeholder="Product Name")}}
-                                                        <div class="invalid-feedback">
-                                                            {% for error in item.item_name() %}
-                                                                <span>{{ error }}</span>
-                                                            {% endfor %}
-                                                        </div>
+                                                        
                                                     </div>
                                                     {{item.item_details(class="form-control bg-light border-0", rows="2", placeholder="Product Details")}}
                                                 </td>
                                                 <td>
                                                     {{item.rate(class="form-control product-price bg-light border-0", placeholder="0.00")}}
-                                                    
-                                                    <div class="invalid-feedback">
-                                                        {% for error in item.rate() %}
-                                                            <span>{{ error }}</span>
-                                                        {% endfor %}
-                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div class="input-step">
@@ -134,9 +124,7 @@
                                                 </td>
                                             </tr>
                                             {% endfor %}
-                                        </tbody>
-                                        <tbody>
-                                            <tr id="newForm" style="display: none;"><td class="d-none" colspan="5"><p>Add New Form</p></td></tr>
+                                        
                                             <tr>
                                                 <td colspan="5">
                                                     <a href="javascript:new_link()" id="add-item" class="btn btn-soft-secondary fw-medium"><i class="ri-add-fill me-1 align-bottom"></i> Add Item</a>
@@ -154,9 +142,9 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Labour</th>
+                                                                <th scope="row">{{form.labour.label|striptags}}</th>
                                                                 <td>
-                                                                    <input type="text" class="form-control bg-light border-0" id="cart-tax" placeholder="$0.00" readonly />
+                                                                    {{form.labour(class="form-control bg-light border-0", id="cart-labour", value="0.00", onkeyup="updateTotal()")}}
                                                                 </td>
                                                             </tr>
                                                             <tr class="border-top border-top-dashed">
@@ -217,6 +205,9 @@
 {% block scripts %}
 {{super()}}
 <!--Invoice create init js-->
+<script>
+    var itemCount = {{ form.items|length }};
+</script>
 <script src="{{url_for('static', filename='js/invoicecreate.init.js')}}"></script>
 {% endblock scripts %}
 

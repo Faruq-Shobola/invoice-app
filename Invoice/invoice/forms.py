@@ -16,4 +16,5 @@ class InvoiceForm(FlaskForm):
     due_date = DateField('Due Date', validators=[DataRequired()])
     items = FieldList(FormField(InvoiceItemForm), min_entries=1)
     note = TextAreaField('Note')
+    labour = IntegerField("Labour")
     submit = SubmitField('Generate Invoice')
