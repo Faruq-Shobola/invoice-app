@@ -50,3 +50,22 @@ class Client(db.Model):
     
     def __repr__(self):
         return f'{self.name} - {self.email}'
+    
+    
+class InvoiceItem(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(), nullable=False)
+    details = db.Column(db.String(150))
+    quantity = db.Column(db.Integer(), nullable=False)
+    rate = db.Column(db.Integer(), nullable=False)
+    invoice_id = db.Column(db.Integer(), db.ForeignKey('invoice.id'))
+    
+class Invoice(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    invoice_id = db.Column(db.Integer(), nullable=False) # change this to invoice_no
+    invoice_date = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime(), nullable=False)
+    note = db.Column(db.Text())
+    items = db.Relationship('InvoiceItem', backref='items', lazy=True)
+    labour = db.Column(db.Integer(), nullable=False)
+    
