@@ -46,6 +46,7 @@ class Client(db.Model):
     address = db.Column(db.Text())
     logo = db.Column(db.String(), default='logo.jpg')
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    invoices = db.relationship('Invoice', backref='client', lazy=True)
     date_joined = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
     
     def __repr__(self):
@@ -53,19 +54,26 @@ class Client(db.Model):
     
     
 class InvoiceItem(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), nullable=False)
     details = db.Column(db.String(150))
-    quantity = db.Column(db.Integer(), nullable=False)
-    rate = db.Column(db.Integer(), nullable=False)
-    invoice_id = db.Column(db.Integer(), db.ForeignKey('invoice.id'))
+    quantity = db.Column(db.Integer, nullable=False)
+    rate = db.Column(db.Integer, nullable=False)
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id'))
+    
+    def __repr__(self):
+        return f'{self.name} - {self.rate} - {self.quantity}'
     
 class Invoice(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    invoice_id = db.Column(db.Integer(), nullable=False) # change this to invoice_no
+    id = db.Column(db.Integer, primary_key=True)
+    invoice_no = db.Column(db.Integer, nullable=False)
     invoice_date = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
-    due_date = db.Column(db.DateTime(), nullable=False)
+    due_date = db.Column(db.Date(), nullable=False)
+    client = db.Column(db.Integer, db.ForeignKey('client.id'))
     note = db.Column(db.Text())
-    items = db.Relationship('InvoiceItem', backref='items', lazy=True)
-    labour = db.Column(db.Integer(), nullable=False)
+    items = db.relationship('InvoiceItem', backref='invoice', lazy=True)
+    labour = db.Column(db.Integer, nullable=False)
+    
+    def __repr__(self):
+        return f'{self.invoice_no} - {self.items}'
     
