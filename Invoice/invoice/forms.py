@@ -12,7 +12,6 @@ class InvoiceItemForm(FlaskForm):
 
 class InvoiceForm(FlaskForm):
     client = SelectField('Client', validators=[DataRequired()], coerce=int)
-    invoice_date = DateField('Date Created', validators=[DataRequired()])
     due_date = DateField('Due Date', validators=[DataRequired()])
     items = FieldList(FormField(InvoiceItemForm), min_entries=1)
     note = TextAreaField('Note')
