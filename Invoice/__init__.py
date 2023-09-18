@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 from invoice.config import Config
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 migrate = Migrate()

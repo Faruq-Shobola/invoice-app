@@ -69,7 +69,7 @@ class Invoice(db.Model):
     invoice_no = db.Column(db.Integer, nullable=False)
     invoice_date = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
     due_date = db.Column(db.Date(), nullable=False)
-    client = db.Column(db.Integer, db.ForeignKey('client.id'))
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     note = db.Column(db.Text())
     items = db.relationship('InvoiceItem', backref='invoice', lazy=True)
     labour = db.Column(db.Integer, nullable=False)
