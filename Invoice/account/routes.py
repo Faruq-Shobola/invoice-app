@@ -1,5 +1,7 @@
 from flask import redirect, render_template, url_for, Blueprint
 from flask_login import login_required
+from invoice.models import User
+from flask_login import current_user
 
 acct = Blueprint('account', __name__)
 
@@ -12,4 +14,5 @@ def home():
 @acct.route('/profile')
 @login_required
 def profile():
-    return render_template('account/profile.html', title='Profile')
+    user = current_user
+    return render_template('account/profile.html', title='Profile', user=user)

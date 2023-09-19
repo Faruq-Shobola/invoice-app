@@ -11,10 +11,19 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
     username = db.Column(db.String(), unique=True, nullable=False)
     email = db.Column(db.String(), unique=True, nullable=False)
     password = db.Column(db.String(), nullable=False)
+    mobile = db.Column(db.String())
+    location = db.Column(db.String())
+    facebook = db.Column(db.String())
+    instagram = db.Column(db.String())
+    linkedin = db.Column(db.String())
+    twitter = db.Column(db.String())
     clients = db.relationship('Client', backref='customer', lazy=True)
+    date_joined = db.Column(db.DateTime(), default=datetime.utcnow)
+    
     
     def generate_reset_token(self):
         s = Serializer(current_app.config['SECRET_KEY'], salt='reset')
@@ -68,7 +77,7 @@ class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     invoice_no = db.Column(db.Integer, nullable=False)
     invoice_date = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
-    due_date = db.Column(db.Date(), nullable=False)
+    due_date = db.Column(db.Date(), nullable=True)
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
     note = db.Column(db.Text())
     items = db.relationship('InvoiceItem', backref='invoice', lazy=True)
