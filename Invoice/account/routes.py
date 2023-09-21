@@ -16,3 +16,11 @@ def home():
 def profile():
     user = current_user
     return render_template('account/profile.html', title='Profile', user=user)
+
+
+@acct.route('/edit-profile')
+@login_required
+def edit_profile():
+    user = current_user
+    return render_template('account/editprofile.html', title="Edit Profile", user=user)
+    
